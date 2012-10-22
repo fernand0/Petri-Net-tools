@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+# This program generates the Petri Net of the Philosophers with decissions
+# as described in:
+# Computing minimal siphons in Petri net models of resource allocation 
+# systems: a parallel solution.
+# Tricas, F.; Ezpeleta, J.; 
+# Systems, Man and Cybernetics, Part A, IEEE Transactions 
+# Volume 36, Issue 3, May 2006 Page(s):532 - 539 
+
+# It takes as argument the number of Philosophers and generates the net 
+# using the paths of nodes in PTN format.
+# There is a second optional parameter to give a name to the Petri Net
 
 int main(int argc, char *argv[])
 {

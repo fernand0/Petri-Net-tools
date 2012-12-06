@@ -16,12 +16,14 @@ int arc_id=0;                               /*to avoid collisions, arc indexes f
 
 void preface(FILE *of){
 
-    fprintf(of,"<pnml xmlns=\"http://www.informatik.hu-berlin.de/top/pntd/ptNetb\">\n");
-    fprintf(of,"\t<net id=\"netId1353166803140\" type=\"http://www.informatik.hu-berlin.de/top/pntd/ptNetb\">\n");
+    fprintf(of,"<pnml xmlns=\"http://www.pnml.org/version-2009/grammar/pnml\">\n");
+    fprintf(of,"\t<net id=\"n1\" type=\"http://www.pnml.org/version-2009/grammar/ptnet\">\n");
+    fprintf(of,"\t\t<page id=\"main-page\">\n");
 }
 
 void epilog(FILE *of,char* name){
 
+    fprintf(of,"\t\t</page>\n");
     fprintf(of,"\t\t<name>\n");
     fprintf(of,"\t\t\t<text>%s</text>\n",name);
     fprintf(of,"\t\t</name>\n");
@@ -32,60 +34,60 @@ void epilog(FILE *of,char* name){
 
      //Graphical elements, except position, are constant
 void generate_place(FILE *of,int id,char* name,int x_pos,int y_pos,int marking){
-    fprintf(of,"\t\t<place id=\"%1d\">\n",id);
-    fprintf(of,"\t\t\t<name>\n");
-    fprintf(of,"\t\t\t\t<graphics>\n");
-    fprintf(of,"\t\t\t\t\t<offset x=\"30\" y=\"0\"/>\n");
-    fprintf(of,"\t\t\t\t</graphics>\n");
-    fprintf(of,"\t\t\t\t<text>%s</text>\n",name);
-    fprintf(of,"\t\t\t</name>\n");
+    fprintf(of,"\t\t\t<place id=\"ras-%1d\">\n",id);
+    fprintf(of,"\t\t\t\t<name>\n");
+    fprintf(of,"\t\t\t\t\t<graphics>\n");
+    fprintf(of,"\t\t\t\t\t\t<offset x=\"30\" y=\"0\"/>\n");
+    fprintf(of,"\t\t\t\t\t</graphics>\n");
+    fprintf(of,"\t\t\t\t\t<text>%s</text>\n",name);
+    fprintf(of,"\t\t\t\t</name>\n");
 
     if(marking != 0){
-        fprintf(of,"\t\t\t<initialMarking>\n");
-        fprintf(of,"\t\t\t\t<graphics>\n");
-        fprintf(of,"\t\t\t\t\t<offset x=\"0\" y=\"0\"/>\n");
-        fprintf(of,"\t\t\t\t</graphics>\n");
-        fprintf(of,"\t\t\t\t<text>%1d</text>\n",marking);
-        fprintf(of,"\t\t\t</initialMarking>\n");
+        fprintf(of,"\t\t\t\t<initialMarking>\n");
+        fprintf(of,"\t\t\t\t\t<graphics>\n");
+        fprintf(of,"\t\t\t\t\t\t<offset x=\"0\" y=\"0\"/>\n");
+        fprintf(of,"\t\t\t\t\t</graphics>\n");
+        fprintf(of,"\t\t\t\t\t\t<text>%1d</text>\n",marking);
+        fprintf(of,"\t\t\t\t</initialMarking>\n");
     }
-    fprintf(of,"\t\t\t<graphics>\n");
-    fprintf(of,"\t\t\t\t<position x=\"%1d\" y=\"%1d\"/>\n",x_pos,y_pos);
-    fprintf(of,"\t\t\t\t<dimension x=\"20\" y=\"20\"/>\n");
-    fprintf(of,"\t\t\t\t<fill color=\"rgb(255,255,255)\"/>\n");
-    fprintf(of,"\t\t\t\t<line color=\"rgb(0,0,0)\"/>\n");
-    fprintf(of,"\t\t\t</graphics>\n");
-    fprintf(of,"\t\t</place>\n");
+    fprintf(of,"\t\t\t\t<graphics>\n");
+    fprintf(of,"\t\t\t\t\t<position x=\"%1d\" y=\"%1d\"/>\n",x_pos,y_pos);
+    fprintf(of,"\t\t\t\t\t<dimension x=\"20\" y=\"20\"/>\n");
+    fprintf(of,"\t\t\t\t\t<fill color=\"rgb(255,255,255)\"/>\n");
+    fprintf(of,"\t\t\t\t\t<line color=\"rgb(0,0,0)\"/>\n");
+    fprintf(of,"\t\t\t\t</graphics>\n");
+    fprintf(of,"\t\t\t</place>\n");
 }
 
 void generate_transition(FILE *of,int id,char* name,int x_pos,int y_pos){
-    fprintf(of,"\t\t<transition id=\"%1d\">\n",id);
-    fprintf(of,"\t\t\t<name>\n");
-    fprintf(of,"\t\t\t\t<graphics>\n");
-    fprintf(of,"\t\t\t\t\t<offset x=\"30\" y=\"0\"/>\n"); //name inside
-    fprintf(of,"\t\t\t\t</graphics>\n");
-    fprintf(of,"\t\t\t\t<text>%s</text>\n",name);
-    fprintf(of,"\t\t\t</name>\n");
+    fprintf(of,"\t\t\t<transition id=\"ras-%1d\">\n",id);
+    fprintf(of,"\t\t\t\t<name>\n");
+    fprintf(of,"\t\t\t\t\t<graphics>\n");
+    fprintf(of,"\t\t\t\t\t\t<offset x=\"30\" y=\"0\"/>\n"); //name inside
+    fprintf(of,"\t\t\t\t\t</graphics>\n");
+    fprintf(of,"\t\t\t\t\t<text>%s</text>\n",name);
+    fprintf(of,"\t\t\t\t</name>\n");
 
-    fprintf(of,"\t\t\t<graphics>\n");
-    fprintf(of,"\t\t\t\t<position x=\"%1d\" y=\"%1d\"/>\n",x_pos,y_pos);
-    fprintf(of,"\t\t\t\t<dimension x=\"24\" y=\"16\"/>\n");
-    fprintf(of,"\t\t\t\t<fill color=\"rgb(255,255,255)\"/>\n");
-    fprintf(of,"\t\t\t\t<line color=\"rgb(0,0,0)\"/>\n");
-    fprintf(of,"\t\t\t</graphics>\n");
-    fprintf(of,"\t\t</transition>\n");
+    fprintf(of,"\t\t\t\t<graphics>\n");
+    fprintf(of,"\t\t\t\t\t<position x=\"%1d\" y=\"%1d\"/>\n",x_pos,y_pos);
+    fprintf(of,"\t\t\t\t\t<dimension x=\"24\" y=\"16\"/>\n");
+    fprintf(of,"\t\t\t\t\t<fill color=\"rgb(255,255,255)\"/>\n");
+    fprintf(of,"\t\t\t\t\t<line color=\"rgb(0,0,0)\"/>\n");
+    fprintf(of,"\t\t\t\t</graphics>\n");
+    fprintf(of,"\t\t\t</transition>\n");
 }
 
 void generate_arc(FILE *of,int id,int source,int target){/*forget id parameter*/
 
-    fprintf(of,"\t\t<arc id=\"%1d\" source=\"%1d\" target=\"%1d\">\n",arc_id,source,target);
-    fprintf(of,"\t\t\t<type>\n");
-    fprintf(of,"\t\t\t\t<text>ordinary</text>\n");
-    fprintf(of,"\t\t\t</type>\n");
+    fprintf(of,"\t\t\t<arc id=\"ras-%1d\" source=\"ras-%1d\" target=\"ras-%1d\">\n",arc_id,source,target);
+    fprintf(of,"\t\t\t\t<inscription>\n");
+    fprintf(of,"\t\t\t\t\t<text>1</text>\n");
+    fprintf(of,"\t\t\t\t</inscription>\n");
 
-    fprintf(of,"\t\t\t<graphics>\n");
-    fprintf(of,"\t\t\t\t<line color=\"rgb(0,0,0)\" style=\"solid\"/>\n");
-    fprintf(of,"\t\t\t</graphics>\n");
-    fprintf(of,"\t\t</arc>\n");
+    fprintf(of,"\t\t\t\t<graphics>\n");
+    fprintf(of,"\t\t\t\t\t<line color=\"rgb(0,0,0)\" style=\"solid\"/>\n");
+    fprintf(of,"\t\t\t\t</graphics>\n");
+    fprintf(of,"\t\t\t</arc>\n");
 
     arc_id++;
 }
